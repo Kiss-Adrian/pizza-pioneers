@@ -1,9 +1,0 @@
-CPU	AMD Ryzen 5 5600	~130€
-GPU	AMD Radeon RX 6600 (8GB)	~230€
-Alaplap	MSI B450 TOMAHAWK MAX II	~100€
-RAM	16GB (2x8GB) DDR4 3600MHz (pl. Kingston Fury)	~50€
-SSD	1TB NVMe (pl. Kingston NV2)	~70€
-Ház	Zalman S2 TG / DeepCool Matrexx 50	~50€
-Tápegység	600W 80+ Bronze (pl. be quiet! System Power 10)	~60€
-Hűtés (opcionális)	ID-Cooling SE-224-XT	~30€
-Összesen	~850€
