@@ -1,0 +1,32 @@
+const Termekek = require('../models/Termekek');  // Importáljuk a Termekek modellt
+const Rendeles = require('../models/Rendeles');  // Importáljuk a Rendelés modellt
+
+exports.createRendeles = async (req, res) => {
+  try {
+    const { Uid, Tid, Tdb } = req.body;
+
+    // 🔍 1️⃣ Megkeressük a termék árát az adatbázisból
+    const termek = await Termekek.findOne({ where: { Tid: Tid } });
+
+    if (!termek) {
+      return res.status(404).json({ error: "A megadott termék nem található" });
+    }
+
+    const termekAra = termek.Tar;  // A termék árát a `Tar` mezőből kell kinyerni!
+    const ossz = termekAra * Tdb;  // 🔢 Teljes ár kiszámítása
+
+    // 📝 2️⃣ Új rendelés létrehozása a kiszámolt árral
+    const ujRendeles = await Rendeles.create({
+      Uid,
+      Tid,
+      Tdb,
+      ossz  // 💰 Az ár most már helyesen bekerül az adatbázisba
+    });
+
+    res.status(201).json(ujRendeles);
+
+  } catch (error) {
+    console.error("Hiba a rendelés létrehozása közben:", error);
+    res.status(500).json({ error: "Szerverhiba" });
+  }
+};
