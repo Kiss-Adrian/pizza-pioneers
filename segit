@@ -30,3 +30,28 @@ exports.createRendeles = async (req, res) => {
     res.status(500).json({ error: "Szerverhiba" });
   }
 };
+
+
+<% termekek.forEach(termek => { %>
+                <div class="pizza">
+                  <img  class="pizza-img" src="/images/<%= termek.Tnev.toLowerCase() %>.jpg" alt="<%= termek.Tnev %>">
+                  <div class="pizza-info">
+                  <h2><%= termek.Tnev %></h2>
+                  <p class="price">Ár: <%= termek.Tar %> Ft</p>
+                  </div>
+                  <br>
+                  <button onclick="addToCart('<%= termek.Tnev %>', '<%= termek.Tar %>')">Kosárba</button>
+                </div>
+              <% }); %>
+
+const Termekek = require('../models/termekek');
+
+exports.getOrderPage = async (req, res) => {
+  try {
+    const termekek = await Termekek.findAll();
+    res.render('order', { termekek });
+  } catch (error) {
+    console.error('Hiba a termékek lekérésekor:', error);
+    res.status(500).json({ error: 'Belső szerverhiba' });
+  }
+};
